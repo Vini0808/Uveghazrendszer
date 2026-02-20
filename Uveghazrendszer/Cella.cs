@@ -14,7 +14,7 @@ namespace Uveghazrendszer
 		List<Szenzor> szenzorok;
 		List<Riasztas> riasztasok;
 
-		public Cella (int x, int y)
+		public Cella(int x, int y)
 		{
 			this.pozicio = new Pozicio(x, y);
 			this.novenyFaj = null;
@@ -39,14 +39,14 @@ namespace Uveghazrendszer
 		public bool Telepit(NovenyFaj noveny, int mennyiseg)
 		{
 			bool sikeres = false;
-			if (mennyiseg > 0 && !UresE)
+			if (mennyiseg > 0 && UresE)
 			{
 				this.novenyFaj = noveny;
 				this.egyedszam = mennyiseg;
 				Console.WriteLine($"{novenyFaj.Nev} telepítése sikeresen megtörtént");
 				sikeres = true;
 			}
-			else if(mennyiseg > 0 && this.novenyFaj.Equals(noveny))
+			else if (mennyiseg > 0 && this.novenyFaj.Equals(noveny))
 			{
 				Noveles(mennyiseg);
 			}
@@ -71,6 +71,15 @@ namespace Uveghazrendszer
 		public void Noveles(int mennyiseg)
 		{
 			this.egyedszam += mennyiseg;
+		}
+
+		public override string ToString()
+		{
+			if(UresE)
+			{
+				return $"| {"üres",8} |";
+			}
+			return $"| {this.novenyFaj.Azonosito, 3} {this.egyedszam, 2}db |";
 		}
 	}
 }
